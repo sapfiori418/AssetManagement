@@ -1,0 +1,162 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+	xmlns:tnt="sap.tnt"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:t="sap.ui.table"
+	xmlns="sap.m" controllerName="y4cr2ro20e249.controller.AssetView" type="XML" height="100%" viewName="AccountView">
+
+	<Page id="accountPage" title="{i18n>title}" titleAlignment="Center" class="sapUiContentPadding" navButtonPress="onNavButtonPress">
+
+		<VBox id="accountFormContainer" width="100%">
+			<!-- SimpleForm Section -->
+			<f:SimpleForm id="accountSimpleForm" editable="true" class="noTitles customBorder noTopPadding" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" columnsXL="3" columnsL="3" columnsM="2">
+				<f:content>
+					<!-- First Column -->
+					<core:Title id="sectionGeneralTitle" class="hiddenTitle" />
+
+					<Label id="labelCompanyCode" required="true" text="Company Code" />
+					<Input id="inputCompanyCode" value="" showValueHelp="true" valueHelpRequest="onCompanyCodeValueHelpRequest" change="onCompanyCodeChange" />
+
+					<Label id="labelDocumentDate" required="true" text="Document Date" />
+					<!-- <Input id="inputDocumentDate" value="" maxLength="10" placeholder="e.g.31.12.2025" width="100%" showValueHelp="true" valueHelpIconSrc="sap-icon://appointment-2" valueHelpRequest="onDocumentDateValueHelpRequest" change="onDocumentDateChange" /> -->
+					<DatePicker id="inputDocumentDate" value="" placeholder="e.g.31.12.2025" width="100%" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="onDocumentDateChange" />
+
+					<Label id="labelPostingDate" required="true" text="Posting Date" />
+					<!-- <Input id="inputPostingDate" value="" maxLength="10" placeholder="e.g.31.12.2025" width="100%" showValueHelp="true" valueHelpIconSrc="sap-icon://appointment-2" valueHelpRequest="onPostingDateValueHelpRequest" change="onPostingDateChange" /> -->
+					<DatePicker id="inputPostingDate" value="" placeholder="e.g.31.12.2025" width="100%" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="onPostingDateChange" />
+
+					<!-- Second Column -->
+					<core:Title id="sectionAccountingDetails" class="hiddenTitle" />
+
+					<Label id="labelPostingPeriod" required="true" text="Posting Period" />
+					<!-- <Input id="inputPostingPeriod" value="" maxLength="10" placeholder="e.g.31.12.2025" showValueHelp="true" valueHelpIconSrc="sap-icon://appointment-2" valueHelpRequest="onPostingPeriodValueHelpRequest" change="onPostingPeriodChange" /> -->
+					<DatePicker id="inputPostingPeriod" value="" placeholder="e.g.31.12.2025" width="100%" displayFormat="dd.MM.yyyy" valueFormat="dd.MM.yyyy" change="onPostingPeriodChange" />
+
+					<Label id="labelFiscalYear" required="true" text="Fiscal Year" />
+					<!-- <Input id="inputFiscalYear" value="" maxLength="10" placeholder="e.g.2025" showValueHelp="true" valueHelpIconSrc="sap-icon://appointment-2" valueHelpRequest="onFiscalYearValueHelpRequest" change="onFiscalYearChange" /> -->
+					<DatePicker id="inputFiscalYear" value="" placeholder="e.g.2025" width="100%" displayFormat="yyyy" valueFormat="yyyy" change="onFiscalYearChange" />
+
+					<Label id="labelCurrency" required="true" text="Currency" />
+					<Input id="inputCurrency" value="" showValueHelp="true" valueHelpRequest="onCurrencyValueHelpRequest" change="onCurrencyChange" />
+
+					<!-- Third Column -->
+					<core:Title id="sectionAdditionalInfo" class="hiddenTitle" />
+
+					<Label id="labelHeaderText" text="Header Text" />
+					<Input id="inputHeaderText" value="" showValueHelp="true" valueHelpRequest="onHeaderTextValueHelpRequest" change="onHeaderTextChange" />
+
+					<Label id="labelReference" text="Reference" />
+					<Input id="inputReference" value="" showValueHelp="true" valueHelpRequest="onReferenceValueHelpRequest" change="onReferenceChange" />
+				</f:content>
+			</f:SimpleForm>
+
+			<!-- Table Section -->
+			<t:Table id="accountTable" class="sapUiSmallMarginTop" rows="{/items}" selectionMode="MultiToggle" paste="onPaste" ariaLabelledBy="title">
+				<t:extension>
+					<OverflowToolbar id="tableToolbar">
+						<Title id="tableTitle" text="{= 'Items (' + ${/items}.length + ')' }"  />
+						<ToolbarSpacer />
+						<Button id="btnDownloadTemplate" type="Ghost" icon="sap-icon://download" text="Download Template" press="onDownloadTemplate" />
+						<Button id="btnUpload" type="Ghost" icon="sap-icon://upload" text="Upload" press="onUpload" />
+						<Button id="btnSimulation" type="Success" icon="sap-icon://validate" text="Simulation" press="onSimulation" />
+						<Button id="btnPost" type="Attention" icon="sap-icon://repost" text="Post" press="onPost" class="myAttentionBtn" />
+						<Button id="btnAdd" type="Emphasized" icon="sap-icon://add" text="Add" press="onAdd" />
+						<Button id="btnDelete" type="Reject" icon="sap-icon://delete" text="Delete" press="onDelete" />
+						<Button id="btnClearFilters" type="Ghost" icon="sap-icon://decline" text="Clear Filters" press="onClearFilters" />
+					</OverflowToolbar>
+				</t:extension>
+
+				<t:columns>
+					<!-- Column 1: Comp.Code -->
+					<t:Column id="colCompanyCode" width="8rem">
+						<Label id="lblCompanyCode" required="true" text="Comp.Code" />
+						<t:template>
+							<Text id="txtCompanyCode" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 2: Ammount Doc.Curr. -->
+					<t:Column id="colAmountDocCurr" width="10rem">
+						<Label id="lblAmountDocCurr" required="true" text="Amount Doc.Curr." />
+						<t:template>
+							<Text id="txtAmountDocCurr" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 3: Ammount Loc.Curr. -->
+					<t:Column id="colAmountLocCurr" width="9rem">
+						<Label id="lblAmountLocCurr" text="Amount Loc.Curr." />
+						<t:template>
+							<Text id="txtAmountLocCurr" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 4: G/L account -->
+					<t:Column id="colGlAccount" width="8rem">
+						<Label id="lblGlAccount" text="G/L account" />
+						<t:template>
+							<Text id="txtGlAccount" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 5: Vendor pos. -->
+					<t:Column id="colVendorPos" width="8rem">
+						<Label id="lblVendorPos" text="Vendor pos." />
+						<t:template>
+							<Text id="txtVendorPos" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 6: Customer pos. -->
+					<t:Column id="colCustomerPos" width="8rem">
+						<Label id="lblCustomerPos" text="Customer pos." />
+						<t:template>
+							<Text id="txtCustomerPos" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 7: Cost Center -->
+					<t:Column id="colCostCenter" width="8rem">
+						<Label id="lblCostCenter" text="Cost Center" />
+						<t:template>
+							<Text id="txtCostCenter" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 8: Order Number -->
+					<t:Column id="colOrderNumber" width="8rem">
+						<Label id="lblOrderNumber" text="Order Number" />
+						<t:template>
+							<Text id="txtOrderNumber" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 9: Assignment Number -->
+					<t:Column id="colAssignmentNumber" width="11rem">
+						<Label id="lblAssignmentNumber" text="Assignment Number" />
+						<t:template>
+							<Text id="txtAssignmentNumber" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 10: Item Text -->
+					<t:Column id="colItemText" width="9rem">
+						<Label id="lblItemText" text="Item Text" />
+						<t:template>
+							<Text id="txtItemText" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<!-- Column 11: Profit Center -->
+					<t:Column id="colProfitCenter" width="9rem">
+						<Label id="lblProfitCenter" text="Profit Center" />
+						<t:template>
+							<Text id="txtProfitCenter" text="" wrapping="false" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</VBox>
+
+		<!-- Footer Section -->
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<Button id="btnNotification" type="Emphasized" tooltip="Notifications" text="{= ${/notifications}.length }" icon="sap-icon://message-popup" press="onNotificationPress">
+					<layoutData><OverflowToolbarLayoutData priority="NeverOverflow" /></layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

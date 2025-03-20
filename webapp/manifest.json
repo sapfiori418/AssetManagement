@@ -1,0 +1,115 @@
+{
+  "_version": "1.65.0",
+  "sap.app": {
+    "id": "y4cr2ro20e249",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.0",
+      "toolsId": "1f0eeb5a-d413-483f-8ea1-b4d4f1a9a384"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/v2/northwind/northwind.svc/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "fullWidth": true,
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.133.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "y4cr2ro20e249.i18n.i18n"
+        }
+      },
+      "oModel": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "y4cr2ro20e249.view",
+        "async": true,
+        "viewPath": "y4cr2ro20e249.view"
+      },
+      "routes": [
+        {
+          "name": "RouteAssetView",
+          "pattern": ":?query:",
+          "target": [
+            "TargetAssetView"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetAssetView": {
+          "id": "AssetView",
+          "name": "AssetView"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "y4cr2ro20e249.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}
