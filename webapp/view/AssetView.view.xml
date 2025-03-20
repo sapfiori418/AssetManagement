@@ -11,7 +11,7 @@
 
 		<VBox id="accountFormContainer" width="100%">
 			<!-- SimpleForm Section -->
-			<f:SimpleForm id="accountSimpleForm" editable="true" class="noTitles customBorder noTopPadding" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" columnsXL="3" columnsL="3" columnsM="2">
+			<f:SimpleForm id="accountSimpleForm" editable="true" class="noTitles customBorder noTopPadding sapUiSizeCompact" layout="ResponsiveGridLayout" adjustLabelSpan="false" labelSpanXL="12" labelSpanL="12" labelSpanM="12" labelSpanS="12" columnsXL="3" columnsL="3" columnsM="2">
 				<f:content>
 					<!-- First Column -->
 					<core:Title id="sectionGeneralTitle" class="hiddenTitle" />
@@ -58,6 +58,7 @@
 					<OverflowToolbar id="tableToolbar">
 						<Title id="tableTitle" text="{= 'Items (' + ${/items}.length + ')' }"  />
 						<ToolbarSpacer />
+						<Button  type="Ghost"  text="Show Data" press="onShowData" />
 						<Button id="btnDownloadTemplate" type="Ghost" icon="sap-icon://download" text="Download Template" press="onDownloadTemplate" />
 						<Button id="btnUpload" type="Ghost" icon="sap-icon://upload" text="Upload" press="onUpload" />
 						<Button id="btnSimulation" type="Success" icon="sap-icon://validate" text="Simulation" press="onSimulation" />

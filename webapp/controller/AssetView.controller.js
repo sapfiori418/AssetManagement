@@ -22,6 +22,69 @@ sap.ui.define([
 
             // Set the model to the view
             this.getView().setModel(oModel);
+
+
+            var oTableModel = new JSONModel();
+            this.getView().setModel(oTableModel, "oTableModel");
+
+            this._oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            this._oRouter.attachRouteMatched(this._handleRouteMatched, this);
+        },
+
+        _handleRouteMatched: function(oEvent) {
+            var that = this;
+            // oEvent.getParameters().arguments.TableIndex
+            var oParameters = oEvent.getParameters();
+            if (oParameters.name === 'RouteAssetView') {
+               // this.onReadData();
+                
+            }
+        },
+
+        onReadData: function(){
+            var oModel = this.getView().getModel("oModel");
+            oModel.read("/Customers", {
+                success: function(oData, response) {
+                    console.log("Customers data:", oData);
+                },
+                error: function(oError) {
+                    console.error("Error reading data:", oError);
+                }
+            });
+
+        },
+
+     /*   onShowData: function(oEvent){
+            var that = this;
+            var oModel = this.getView().getModel("oModel");
+            var oTableModel = this.getView().getModel("oTableModel");
+            sap.ui.core.BusyIndicator.show(0);
+            oModel.read("/Customers", {
+                success: function(oData, response) {
+                    sap.ui.core.BusyIndicator.hide();
+                    oTableModel.setProperty("/aTableResults", oData.results);
+                    if (!that.oTableDialog) {
+                        that.oTableDialog = sap.ui.xmlfragment("y4cr2ro20e249.fragment.TableDialog", that);
+                        that.getView().addDependent(that.oTableDialog, that);
+                    }
+        
+                    that.oTableDialog.open();
+                    console.log("Customers data:", oData);
+                },
+                error: function(oError) {
+                    console.error("Error reading data:", oError);
+                }
+            });
+
+        }, */
+
+        onShowData: function(oEvent){
+            var that = this;
+                    if (!that.oTableDialog) {
+                        that.oTableDialog = sap.ui.xmlfragment("y4cr2ro20e249.fragment.TableDialog", that);
+                        that.getView().addDependent(that.oTableDialog, that);
+                    }
+                    that.oTableDialog.open();
         },
 
         onDocumentDateChange: function(oEvent) {

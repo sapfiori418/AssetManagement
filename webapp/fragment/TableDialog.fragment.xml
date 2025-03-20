@@ -1,0 +1,57 @@
+
+	<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	
+			<TableSelectDialog
+		id="myDialog"
+		noDataText="No Products Found"
+		title="Select Customer"
+		search=".handleSearch"
+		confirm=".handleClose"
+		cancel=".handleClose"
+		items="{
+			path : 'oModel>/Customers'}">
+		<ColumnListItem vAlign="Middle">
+			<cells>
+				
+				<Text text="{oModel>CustomerID}" />
+                <Text text="{oModel>CompanyName}" />
+                <Text text="{oModel>ContactName}" />
+                <Text text="{oModel>Address}" />
+                <Text text="{oModel>City}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="12em">
+				<header>
+					<Text text="CustomerID" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="CompanyName" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="End">
+				<header>
+					<Text text="ContactName" />
+				</header>
+			</Column>
+			<Column
+				minScreenWidth="Desktop"
+				demandPopin="true"
+				hAlign="Center">
+				<header>
+					<Text text="Address" />
+				</header>
+			</Column>
+			<Column hAlign="End">
+				<header>
+					<Text text="City" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>
